@@ -1,4 +1,5 @@
 import Price from "./Price.jsx";
+import MyStyledButton from "./MyStyledComponents.js";
 
 export default function ProductCard({product}) {
 
@@ -18,6 +19,7 @@ export default function ProductCard({product}) {
                     <div className="product-card-price">
                         <Price currency="£ " price={product.price}/>
                     </div>
+                    <div><MyStyledButton>BUY</MyStyledButton></div>
                 </div>
             </div>
         </div>
