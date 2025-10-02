@@ -4,8 +4,12 @@ import Header from "./components/Header.jsx";
 function App() {
 
     return (
-        <Header/>
-    )
+        <div>
+            <Header/>
+            {/*<ClassHeader/>*/}
+        </div>
+    );
+
 }
 
-export default App
+export default App;
