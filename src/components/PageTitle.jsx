@@ -1,5 +1,5 @@
-export default function PageTitle() {
+export default function PageTitle(props) {
     return (
-        <div>Page Title</div>
+        <div className="page-title">{props.title}</div>
     );
 }
