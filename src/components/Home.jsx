@@ -24,11 +24,25 @@ export default function Home() {
             const response = await apiClient.get("/products"); // Axios GET Request
             setProducts(response.data); // Update products state with fetched data
         } catch (error) {
-            setError(error.response?.data?.message || "Failed to fetch products. Please try again."); // Extract error message if available
+            setError(error.response?.data?.message || "Failed to fetch products. Please try again!"); // Extract error message if available
         } finally {
             setLoading(false);
         }
     };
+
+    if (loading) {
+
+        return (
+            <div className="spinner-border text-secondary" role="output">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        )
+
+    }
+
+    if (error) {
+        return <div className="error">{error}</div>
+    }
 
     return (
         <div className="home-container">
