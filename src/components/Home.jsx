@@ -45,11 +45,11 @@ export default function Home() {
     }
 
     return (
-        <div className="home-container">
-            <PageHeading title="Welcome to Our Website!">
-                This the content sent by home going to be accessed as children by the child component "ie. PageHeading"
+        <div className="max-w-[1152px] mx-auto px-6 py-8">
+            <PageHeading title="Welcome!">
+                Add a touch of creativity to your space with our wide range of fun and
+                unique stickers. Perfect for any occasion!
             </PageHeading>
-
             <ProductListings products={products}/>
         </div>
     )
