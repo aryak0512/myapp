@@ -5,11 +5,20 @@ import {useState} from "react";
 
 export default function ProductListings({products}) {
 
+    // hooks
     const [searchText, setSearchText] = useState("");
+    const [sortBy, setSortBy] = useState("Price: Low to High");
+
+    // stubbed for now
+    const sortOptions = ["Price: Low to High", "Price: High to Low", "Newest Arrivals", "Popularity"];
 
     function handleSearchChange(searchValue) {
         setSearchText(searchValue);
-        console.log(searchText);
+    }
+
+    function handleSortChange(sortByKey) {
+        console.log("Sort by parameter changed :", sortBy);
+        setSortBy(sortByKey);
     }
 
     // Filter products based on search text - on first time loading nothing will be filtered
@@ -18,8 +27,17 @@ export default function ProductListings({products}) {
         product.description.toLowerCase().includes(searchText.toLowerCase())
     );
 
-    // stubbed for now
-    const sortOptions = ["Price: Low to High", "Price: High to Low", "Newest Arrivals"];
+    filteredProducts.sort((a, b) => {
+
+        if (sortBy === "Price: Low to High") {
+            return a.price - b.price; // low to high
+        } else if (sortBy === "Price: High to Low") {
+            return b.price - a.price; // high to low
+        } else if (sortBy === "Popularity") {
+            return b.popularity - a.popularity; // most popular first
+        }
+
+    });
 
     return (
 
@@ -30,7 +48,8 @@ export default function ProductListings({products}) {
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-12">
                 <SearchBar label="Search" placeholder="Find here..." value={searchText}
                            handleSearch={(searchValue) => handleSearchChange(searchValue)}/>
-                <Dropdown label="Sort by" options={sortOptions} selectedValue={sortOptions[0]}/>
+                <Dropdown label="Sort by" options={sortOptions} selectedValue={sortBy}
+                          handleSortChange={(sortBy) => handleSortChange(sortBy)}/>
             </div>
 
 
