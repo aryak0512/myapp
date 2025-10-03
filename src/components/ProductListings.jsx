@@ -1,7 +1,7 @@
 import Dropdown from "./Dropdown.jsx";
 import ProductCard from "./ProductCard.jsx";
 import SearchBar from "./SearchBar.jsx";
-import {useState} from "react";
+import {useMemo, useState} from "react";
 
 export default function ProductListings({products}) {
 
@@ -9,8 +9,35 @@ export default function ProductListings({products}) {
     const [searchText, setSearchText] = useState("");
     const [sortBy, setSortBy] = useState("Price: Low to High");
 
+    // useMemo hook : used for caching results and avoid expesnive calculations on every render
+    // results are cached until dependencies change
+    // it expects a compute function and an array of dependencies
+
+    const filteredProducts = useMemo(() => {
+
+        // Filter products based on search text - on first time loading nothing will be filtered
+        let filteredProducts = products.filter(product =>
+            product.name.toLowerCase().includes(searchText.toLowerCase()) ||
+            product.description.toLowerCase().includes(searchText.toLowerCase())
+        );
+
+        return filteredProducts.sort((a, b) => {
+
+            if (sortBy === "Price: Low to High") {
+                return a.price - b.price; // low to high
+            } else if (sortBy === "Price: High to Low") {
+                return b.price - a.price; // high to low
+            } else if (sortBy === "Popularity") {
+                return b.popularity - a.popularity; // most popular first
+            }
+
+        });
+
+    }, [products, searchText, sortBy]);
+
+
     // stubbed for now
-    const sortOptions = ["Price: Low to High", "Price: High to Low", "Newest Arrivals", "Popularity"];
+    const sortOptions = ["Price: Low to High", "Price: High to Low", "Popularity"];
 
     function handleSearchChange(searchValue) {
         setSearchText(searchValue);
@@ -21,23 +48,6 @@ export default function ProductListings({products}) {
         setSortBy(sortByKey);
     }
 
-    // Filter products based on search text - on first time loading nothing will be filtered
-    let filteredProducts = products.filter(product =>
-        product.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchText.toLowerCase())
-    );
-
-    filteredProducts.sort((a, b) => {
-
-        if (sortBy === "Price: Low to High") {
-            return a.price - b.price; // low to high
-        } else if (sortBy === "Price: High to Low") {
-            return b.price - a.price; // high to low
-        } else if (sortBy === "Popularity") {
-            return b.popularity - a.popularity; // most popular first
-        }
-
-    });
 
     return (
 
