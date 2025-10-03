@@ -12,6 +12,12 @@ export default function ProductListings({products}) {
         console.log(searchText);
     }
 
+    // Filter products based on search text - on first time loading nothing will be filtered
+    let filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(searchText.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchText.toLowerCase())
+    );
+
     // stubbed for now
     const sortOptions = ["Price: Low to High", "Price: High to Low", "Newest Arrivals"];
 
@@ -32,7 +38,7 @@ export default function ProductListings({products}) {
 
                 <div className="product-listings-grid">
 
-                    {products.length > 0 ? products.map(product => (
+                    {filteredProducts.length > 0 ? filteredProducts.map(product => (
 
                         <ProductCard key={product.id} product={product}/>
 
