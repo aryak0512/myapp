@@ -2,6 +2,9 @@
 
 @import "tailwindcss";
 
+/*For light and dark mode toggle*/
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
     --font-primary: "Josefin Sans";
     --color-primary: #5B21B6;
