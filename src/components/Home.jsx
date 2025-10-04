@@ -11,9 +11,9 @@ export default function Home() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-
     // Run once when the component mounts
     // Mounting is the process of creating and adding the component into DOM
+    // useEffect hook is used to perform external synchronous operations like data fetching from backend systems
     useEffect(() => {
         fetchProducts();
     }, []);

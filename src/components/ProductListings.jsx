@@ -55,7 +55,7 @@ export default function ProductListings({products}) {
 
             {/*Search bar and dropdown components in an inner container*/}
 
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-6 py-12">
                 <SearchBar label="Search" placeholder="Find here..." value={searchText}
                            handleSearch={(searchValue) => handleSearchChange(searchValue)}/>
                 <Dropdown label="Sort by" options={sortOptions} selectedValue={sortBy}
@@ -63,9 +63,9 @@ export default function ProductListings({products}) {
             </div>
 
 
-            <div className="product-listings-container">
+            <div className="max-w-[1152px] mx-auto">
 
-                <div className="product-listings-grid">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-6 py-12">
 
                     {filteredProducts.length > 0 ? filteredProducts.map(product => (
 
