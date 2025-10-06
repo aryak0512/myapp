@@ -8,6 +8,7 @@ import About from "./components/About.jsx";
 import Login from "./components/Login.jsx";
 import Contact from "./Contact.jsx";
 import Home from "./components/Home.jsx";
+import ErrorPage from "./components/ErrorPage.jsx";
 
 
 const appRouter = createBrowserRouter([
@@ -15,6 +16,7 @@ const appRouter = createBrowserRouter([
     {
         "path": "/",
         "element": <App/>,
+        "errorElement": <ErrorPage/>,
         "children": [
             // this works as the default component in case outlet cannot find any children
             {
