@@ -1,6 +1,7 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMoon, faShoppingBasket, faSun, faTags} from "@fortawesome/free-solid-svg-icons";
 import {useState} from "react";
+import {Link, NavLink} from "react-router-dom";
 
 export default function Header() {
 
@@ -25,10 +26,10 @@ export default function Header() {
     return (
         <header className="border-b border-gray-300 sticky top-0 z-20 bg-gray-100">
             <div className="flex items-center justify-between mx-auto max-w-[1152px] px-6 py-4">
-                <a href="/" className={navLinkClass}>
+                <Link to="/" className={navLinkClass}>
                     <FontAwesomeIcon icon={faTags} className="h-8 w-8"/>
                     <span className="font-bold">Product Store</span>
-                </a>
+                </Link>
                 <nav className="flex items-center py-2 z-10">
                     <button className={buttonClassName} aria-label="Toggle theme" onClick={toggleTheme}>
                         <FontAwesomeIcon icon={theme === "light" ? faMoon : faSun}
@@ -36,19 +37,25 @@ export default function Header() {
                     </button>
                     <ul className="flex space-x-6">
                         <li>
-                            <a href="/" className={navLinkClass}>Home</a>
+                            <NavLink to="/" className={navLinkClass}>Home</NavLink>
                         </li>
                         <li>
-                            <a href="/about" className={navLinkClass}>About</a>
+                            <NavLink to="/about" className={({isActive}) => {
+                                return isActive ? `underline ${navLinkClass}` : navLinkClass
+                            }}>About</NavLink>
                         </li>
                         <li>
-                            <a href="/contact" className={navLinkClass}>Contact</a>
+                            <NavLink to="/contact" className={({isActive}) => {
+                                return isActive ? `underline ${navLinkClass}` : navLinkClass
+                            }}>Contact</NavLink>
                         </li>
                         <li>
-                            <a href="/login" className={navLinkClass}>Login</a>
+                            <NavLink to="/login" className={({isActive}) =>
+                                isActive ? `underline ${navLinkClass}` : navLinkClass
+                            }>Login</NavLink>
                         </li>
                         <li>
-                            <a href="/cart" className="text-primary py-2"><FontAwesomeIcon icon={faShoppingBasket}/></a>
+                            <NavLink to="/cart" className="text-primary py-2"><FontAwesomeIcon icon={faShoppingBasket}/></NavLink>
                         </li>
                     </ul>
                 </nav>
