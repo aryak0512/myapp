@@ -21,3 +21,9 @@ Add plugin in vite.config.js
 ```bash
 tailwindcss()
 ```
+
+### Installing React router
+
+```bash
+npm i react-router-dom
+```
